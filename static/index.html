@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="light">
+  <title>Northstar Files</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <a class="brand" href="#" aria-label="Northstar Files 首页">
+        <span class="brand-mark">
+          <svg viewBox="0 0 40 40" aria-hidden="true"><path d="M20 4.5 23.5 16 35 20l-11.5 3.7L20 35.5l-3.7-11.8L5 20l11.3-4L20 4.5Z"/><circle cx="20" cy="20" r="3.2"/></svg>
+        </span>
+        <span>Northstar<br><strong>Files</strong></span>
+      </a>
+
+      <nav class="main-nav" aria-label="主导航">
+        <button class="nav-item active" data-filter="all"><span class="nav-icon">⌂</span>全部文件</button>
+        <button class="nav-item" data-filter="video"><span class="nav-icon">▷</span>视频</button>
+        <button class="nav-item" data-filter="image"><span class="nav-icon">▧</span>图片</button>
+        <button class="nav-item" data-filter="audio"><span class="nav-icon">♫</span>音频</button>
+        <button class="nav-item" data-filter="document"><span class="nav-icon">▤</span>文档</button>
+      </nav>
+
+      <div class="sidebar-foot">
+        <div class="server-status"><i></i><span>服务器在线</span></div>
+        <p>安全连接 · 本地浏览</p>
+      </div>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <button class="mobile-menu" id="mobileMenu" aria-label="打开菜单">☰</button>
+        <div class="search-wrap">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="m16 16 4 4"/></svg>
+          <input id="searchInput" type="search" placeholder="搜索当前文件夹…" autocomplete="off">
+          <kbd>⌘ K</kbd>
+        </div>
+        <div class="top-actions">
+          <button class="icon-button" id="refreshButton" aria-label="刷新" title="刷新">↻</button>
+          <span class="avatar">NF</span>
+        </div>
+      </header>
+
+      <section class="content">
+        <div class="hero-row">
+          <div>
+            <div class="eyebrow"><span></span> SERVER STORAGE</div>
+            <h1>你的文件，<em>触手可及。</em></h1>
+            <p>浏览、预览并播放服务器上的媒体内容。</p>
+          </div>
+          <div class="view-toggle" role="group" aria-label="视图模式">
+            <button id="gridView" class="active" aria-label="网格视图">⊞</button>
+            <button id="listView" aria-label="列表视图">☷</button>
+          </div>
+        </div>
+
+        <div class="toolbar">
+          <nav class="breadcrumbs" id="breadcrumbs" aria-label="当前路径"></nav>
+          <div class="toolbar-actions">
+            <label class="sort-control">
+              <span>排序</span>
+              <select id="sortSelect" aria-label="文件排序方式">
+                <option value="name">按名称</option>
+                <option value="modified-desc">修改时间 · 最新</option>
+                <option value="modified-asc">修改时间 · 最早</option>
+              </select>
+            </label>
+            <div class="item-count" id="itemCount">正在读取…</div>
+          </div>
+        </div>
+
+        <div id="loadingState" class="loading-state">
+          <div class="spinner"></div><span>正在读取服务器文件…</span>
+        </div>
+        <div id="emptyState" class="empty-state" hidden>
+          <div>◇</div><h2>这里空空如也</h2><p>这个文件夹中没有可显示的内容。</p>
+        </div>
+        <div id="errorState" class="empty-state error" hidden>
+          <div>!</div><h2>无法读取文件</h2><p id="errorMessage"></p>
+          <button id="retryButton">再试一次</button>
+        </div>
+        <div id="fileGrid" class="file-grid" hidden></div>
+      </section>
+    </main>
+  </div>
+
+  <div class="preview" id="preview" hidden>
+    <div class="preview-backdrop" data-close-preview></div>
+    <section class="preview-panel" role="dialog" aria-modal="true" aria-labelledby="previewTitle">
+      <header class="preview-header">
+        <div class="preview-file-title">
+          <span id="previewTypeIcon">▷</span>
+          <div><h2 id="previewTitle"></h2><p id="previewMeta"></p></div>
+        </div>
+        <div class="preview-actions">
+          <a id="downloadButton" class="download-button" download>下载 <span>↓</span></a>
+          <button class="close-button" data-close-preview aria-label="关闭预览">×</button>
+        </div>
+      </header>
+      <div class="preview-stage" id="previewStage"></div>
+      <footer class="preview-footer">
+        <div><span class="detail-label">位置</span><strong id="previewPath"></strong></div>
+        <div><span class="detail-label">修改时间</span><strong id="previewDate"></strong></div>
+        <div><span class="detail-label">类型</span><strong id="previewMime"></strong></div>
+      </footer>
+      <div class="resize-handle" id="previewResizeHandle" role="separator" aria-label="拖动调整预览窗口大小" title="拖动调整窗口大小"></div>
+    </section>
+  </div>
+
+  <div class="toast" id="toast" role="status"></div>
+  <script src="/app.js" defer></script>
+</body>
+</html>

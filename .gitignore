@@ -1,0 +1,25 @@
+# Python runtime files
+__pycache__/
+*.py[cod]
+*.pyo
+.pytest_cache/
+
+# Browser/UI test artifacts
+.playwright-cli/
+output/
+
+# Local environment and editor files
+.env
+.env.*
+!.env.example
+.venv/
+venv/
+.vscode/
+.idea/
+*.swp
+*~
+
+# Logs and OS metadata
+*.log
+.DS_Store
+Thumbs.db
